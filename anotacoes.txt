@@ -1,0 +1,23 @@
+-- CORE ---
+Contem as principais tags, incluindo 'ForEach' e 'url'
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+${} -> chamado de EL Expression Language
+
+--- FOR EACH ---
+exemplo forEach:
+<c:forEach var="p" items="${produtoList }">
+
+			<tr id="produto${p.id }">
+				<td>${p.nome }</td>
+				<td>${p.preco }</td>
+				<td>${p.descricao }</td>
+				<td>${p.dataInicioVenda.time}</td>
+				<td><a href="#" onclick="return removeProduto(${p.id})">Remover</a></td>
+			</tr>
+		</c:forEach>
+
+Contador:
+<c:forEach var="p" items="${produtoList}" varStatus="st">
+  ${st.count}
+</c:forEach>
