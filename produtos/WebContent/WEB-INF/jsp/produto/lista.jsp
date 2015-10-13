@@ -1,5 +1,4 @@
 <%@page import="br.com.caelum.produtos.modelo.Produto"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -28,6 +27,7 @@
 			<td>Preco</td>
 			<td>Descricao</td>
 			<td>Data de Inicio da Venda</td>
+			<td>Usado</td>
 			<td width="20%">Remover?</td>
 		</tr>
 		
@@ -35,14 +35,33 @@
 		
 			<tr id="produto${p.id }">
 				<td>${st.count }</td>
-				<td>${p.nome }</td>
-				<td>${p.preco }</td>
+				<td>${p.nome.toUpperCase() }</td>
+				<td>
+					<fmt:formatNumber value="${p.preco }" type="currency"/>
+				</td>
 				<td>${p.descricao }</td>
-				<td>${p.dataInicioVenda.time}</td>
+				<td>
+					<fmt:formatDate value="${p.dataInicioVenda.time}" pattern="EEEE, dd 'de' MMMM 'de' yyyy"/>
+				</td>
+				
+				<c:choose>
+				<c:when test="${p.usado }">
+					<td>Sim</td>
+				</c:when>
+				<c:when test="${not p.usado }">
+					<td>Não</td>
+				</c:when>
+				</c:choose>
+				
 				<td><a href="#" onclick="return removeProduto(${p.id})">Remover</a></td>
 			</tr>
 		</c:forEach>
 	</table>
-	<a href="/produtos/produto/formulario">Adicionar um produto</a>
+	
+	<c:set var="nome" value="João da Silva" />
+	<c:out value="${nome}" />
+	
+	<c:url value="/produto/formulario" var="urlAdicionar" />
+	<a href="${urlAdicionar }">Adicionar um produto</a>
 </body>
 </html>

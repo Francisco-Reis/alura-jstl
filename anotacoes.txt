@@ -1,4 +1,4 @@
--- CORE ---
+== CORE ===
 Contem as principais tags, incluindo 'ForEach' e 'url'
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -21,3 +21,45 @@ Contador:
 <c:forEach var="p" items="${produtoList}" varStatus="st">
   ${st.count}
 </c:forEach>
+
+-- IF e CHOOSE---
+<c:if test="${p.usado}">
+<td>Sim</td>
+</c:if>
+<c:if test="${not p.usado}">
+<td>Não</td>
+</c:if>
+
+<c:choose>
+  <c:when test="${p.usado}">
+    <td>Sim</td>
+  </c:when>
+  <c:otherwise>
+    <td>Não</td>
+  </c:otherwise>
+</c:choose>
+
+-- URL ---
+Usamos para partir do context root, ou seja, a raiz do projeto, que pode diferenciar
+em diferentes ambientes.
+Dois exemplos:
+Ex1
+<a href="/produtos/produto/formulario">Adicionar um produto</a>
+Ex2
+<c:url value="/produto/formulario" var="urlAdicionar" />
+<a href="${urlAdicionar}">Adicionar um produto</a>
+
+-- SET e OUT --
+Seta e mostra variaveis:
+<c:set var="nome" value="João da Silva" />
+	<c:out value="${nome}" />
+
+=== FORMAT ===
+Formatadora oficial do JSTL
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+Datas:
+<td><fmt:formatDate pattern="dd/MM/yyyy" value="${p.dataInicioVenda.time}" /></td>
+					pattern="EEEE, dd 'de' MMMM 'de' yyyy" -> padrao por extenso
+Numeros:
+<fmt:formatNumber value="${p.preco}" type="currency"/>
