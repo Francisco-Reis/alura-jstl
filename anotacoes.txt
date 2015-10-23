@@ -63,3 +63,25 @@ Datas:
 					pattern="EEEE, dd 'de' MMMM 'de' yyyy" -> padrao por extenso
 Numeros:
 <fmt:formatNumber value="${p.preco}" type="currency"/>
+
+==== INTERNAZIONALIZACAO ====
+configurada no arquivo web.xml
+
+<context-param>
+    <param-name>
+      javax.servlet.jsp.jstl.fmt.localizationContext
+    </param-name>
+    <param-value>messages</param-value>
+  </context-param>
+
+"messages.properties": é o arquivo padão que sera carregado caso nao haja linguagens especificas
+Criar na pasta "src"
+
+Podemos criar arquivos para casa linguagem:
+- messages_en.properties: ingles
+- messages_pt.properties: portugues
+- messages_de.properties: alemao
+
+===== IMPORT =====
+Importa trechos repetitivos de pagins, como cabeçalho, menus e rodapé
+<c:import url="../_comum/rodape.jsp" />
